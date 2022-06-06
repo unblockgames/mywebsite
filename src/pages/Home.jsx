@@ -8,6 +8,7 @@ import {
   CardHeader,
   Grid,
   Heading,
+  Image,
   Main,
   Text,
   Video,
@@ -98,25 +99,24 @@ function Home(props) {
           Skills
         </Heading>
         <Box>
-          <Grid columns="small" rows="small" gap="xxsmall" fill pad={"medium"}>
+          <Grid columns="small" rows="small" gap="xxsmall" pad={"medium"}>
             {skills.map((skill, idx) => {
               return (
-                <Box fill align="center" pad={"xsmall"}>
+                <Box key={idx} fill align="center" pad={"xsmall"}>
                   <Card
                     hoverIndicator={{ color: "green" }}
-                    width="small"
-                    height={"small"}
+                    fill
                     onClick={() => handleCardClick()}
                   >
-                    <CardHeader alignSelf="center">
-                      <Heading textAlign="center" level="3">
-                        {skill.name}
-                      </Heading>
+                    <CardHeader margin={"xsmall"} justify="center">
+                      <Text size="xlarge">
+                        <b>{skill.name}</b>
+                      </Text>
+                      <Image width={"16px"} src={skill.icon} />
                     </CardHeader>
-                    <CardBody margin={"small"}>
+                    <CardBody margin={"small"} justify="center">
                       <Text>{skill.summary}</Text>
                     </CardBody>
-                    <CardFooter></CardFooter>
                   </Card>
                 </Box>
               );
