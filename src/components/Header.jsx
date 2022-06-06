@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Box, Button, Nav } from "grommet";
+import { Avatar, Box, Button, Nav, ResponsiveContext } from "grommet";
 import { Link, useNavigate } from "react-router-dom";
 import me from "../static/pictures/me.jpeg";
 
@@ -11,6 +11,7 @@ function handleClick(navigate) {
 
 function Header(props) {
   const navigate = useNavigate();
+  const size = React.useContext(ResponsiveContext);
   return (
     <Box direction="row" justify="between">
       <Box
@@ -38,7 +39,9 @@ function Header(props) {
             label="Skills"
             fill
             onClick={() => {
-              window.scroll(0, 1000);
+              if (size === "small")
+                window.scrollTo({ top: 1040, behavior: "smooth" });
+              else window.scrollTo({ top: 1100, behavior: "smooth" });
             }}
           />
         </Box>
