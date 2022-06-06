@@ -1,6 +1,19 @@
 import React from "react";
-import { Box, Button, Heading, Text, Video } from "grommet";
+import {
+  Box,
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Grid,
+  Heading,
+  Main,
+  Text,
+  Video,
+} from "grommet";
 import test from "../static/videos/MVI_1011_2.mp4";
+import skills from "../skills";
 
 function handleClick() {
   const requestOptions = {
@@ -25,15 +38,38 @@ function handleClick() {
   return;
 }
 
+function handleCardClick() {
+  return;
+}
+
 function Home(props) {
   return (
-    <Box color="blue">
-      <Box height={"small"}></Box>
-      <Box alignSelf="center">
-        <Heading color="white" level="1" size="large" alignSelf="start">
+    <Box overflow="hidden" width={{ max: "1920px" }}>
+      <Box
+        height={"950px"}
+        width="large"
+        align="center"
+        alignSelf="center"
+        justify="center"
+        margin={"medium"}
+        overflow="hidden"
+      >
+        <Heading
+          margin={"large"}
+          color="white"
+          level="1"
+          size="large"
+          alignSelf="start"
+        >
           I'm not a jack of all trades...
         </Heading>
-        <Heading color="white" level="1" size="large" alignSelf="end">
+        <Heading
+          margin={"large"}
+          color="white"
+          level="1"
+          size="large"
+          alignSelf="end"
+        >
           I'm a master of many.
         </Heading>
       </Box>
@@ -43,19 +79,51 @@ function Home(props) {
           top: 0,
           zIndex: -10,
         }}
-        width={{ min: "1920px" }}
+        width={{ min: "1905px" }}
         overflow="hidden"
       >
-        <Video autoPlay mute controls={false} margin="none">
+        <Video autoPlay mute controls={false} margin="none" overflow="hidden">
           <source src={test} />
         </Video>
       </Box>
       <Box
         background={{ color: "dark-1", opacity: "strong" }}
-        fill
         style={{ position: "absolute", top: 0, zIndex: -9 }}
+        width={{ min: "1905px" }}
+        height={{ min: "1073px" }}
+        overflow="hidden"
       ></Box>
-      <Box background="blue" fill="horizontal" height="100em"></Box>
+      <Box background="background-back" fill="horizontal" height="100em">
+        <Heading level={"1"} size="large" alignSelf="center" color={"white"}>
+          Skills
+        </Heading>
+        <Box>
+          <Grid columns="small" rows="small" gap="xxsmall" fill pad={"medium"}>
+            {skills.map((skill, idx) => {
+              return (
+                <Box fill align="center" pad={"xsmall"}>
+                  <Card
+                    hoverIndicator={{ color: "green" }}
+                    width="small"
+                    height={"small"}
+                    onClick={() => handleCardClick()}
+                  >
+                    <CardHeader alignSelf="center">
+                      <Heading textAlign="center" level="3">
+                        {skill.name}
+                      </Heading>
+                    </CardHeader>
+                    <CardBody margin={"small"}>
+                      <Text>{skill.summary}</Text>
+                    </CardBody>
+                    <CardFooter></CardFooter>
+                  </Card>
+                </Box>
+              );
+            })}
+          </Grid>
+        </Box>
+      </Box>
     </Box>
   );
 }
