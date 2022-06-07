@@ -16,6 +16,7 @@ import {
 } from "grommet";
 import test from "../static/videos/MVI_1011_2.mp4";
 import Skills from "../components/Skills";
+import SkillDetails from "../components/SkillDetails";
 
 function handleClick() {
   const requestOptions = {
@@ -32,11 +33,15 @@ function handleClick() {
       params: [],
     }),
   };
-  fetch("http://localhost:8332", requestOptions).then((response) => {
-    response.json().then((response) => {
-      console.log(response);
+  fetch("http://localhost:8332", requestOptions)
+    .then((response) => {
+      response.json().then((response) => {
+        console.log(response);
+      });
+    })
+    .catch((error) => {
+      console.log(String(error));
     });
-  });
   return;
 }
 
@@ -98,6 +103,11 @@ function Home(props) {
         setSearchValue={setSearchValue}
         setSkillDetails={setSkillDetails}
       />
+      {skillDetails ? (
+        <SkillDetails skill={skillDetails} setSkillDetails={setSkillDetails} />
+      ) : (
+        ""
+      )}
     </Box>
   );
 }
