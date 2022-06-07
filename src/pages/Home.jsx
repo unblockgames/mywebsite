@@ -11,10 +11,11 @@ import {
   Image,
   Main,
   Text,
+  TextInput,
   Video,
 } from "grommet";
 import test from "../static/videos/MVI_1011_2.mp4";
-import skills from "../skills";
+import Skills from "../components/Skills";
 
 function handleClick() {
   const requestOptions = {
@@ -39,11 +40,9 @@ function handleClick() {
   return;
 }
 
-function handleCardClick() {
-  return;
-}
-
 function Home(props) {
+  const [searchValue, setSearchValue] = React.useState("");
+  const [skillDetails, setSkillDetails] = React.useState();
   return (
     <Box overflow="hidden" width={{ max: "1920px" }}>
       <Box
@@ -94,36 +93,11 @@ function Home(props) {
         height={{ min: "1073px" }}
         overflow="hidden"
       ></Box>
-      <Box background="background-back" fill="horizontal" height="100em">
-        <Heading level={"1"} size="large" alignSelf="center" color={"white"}>
-          Skills
-        </Heading>
-        <Box>
-          <Grid columns="small" rows="small" gap="xxsmall" pad={"medium"}>
-            {skills.map((skill, idx) => {
-              return (
-                <Box key={idx} fill align="center" pad={"xsmall"}>
-                  <Card
-                    hoverIndicator={{ color: "green" }}
-                    fill
-                    onClick={() => handleCardClick()}
-                  >
-                    <CardHeader margin={"xsmall"} justify="center">
-                      <Text size="xlarge">
-                        <b>{skill.name}</b>
-                      </Text>
-                      <Image width={"16px"} src={skill.icon} />
-                    </CardHeader>
-                    <CardBody margin={"small"} justify="center">
-                      <Text>{skill.summary}</Text>
-                    </CardBody>
-                  </Card>
-                </Box>
-              );
-            })}
-          </Grid>
-        </Box>
-      </Box>
+      <Skills
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+        setSkillDetails={setSkillDetails}
+      />
     </Box>
   );
 }
