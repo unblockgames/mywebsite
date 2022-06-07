@@ -49,8 +49,9 @@ function Home(props) {
   const [searchValue, setSearchValue] = React.useState("");
   const [skillDetails, setSkillDetails] = React.useState();
   return (
-    <Box overflow="hidden" width={{ max: "1920px" }}>
+    <Box id="home" overflow="hidden" width={{ max: "1920px" }}>
       <Box
+        id="headingText"
         height={"950px"}
         width="large"
         align="center"
@@ -61,7 +62,6 @@ function Home(props) {
       >
         <Heading
           margin={"large"}
-          color="white"
           level="1"
           size="large"
           alignSelf="start"
@@ -70,7 +70,6 @@ function Home(props) {
         </Heading>
         <Heading
           margin={"large"}
-          color="white"
           level="1"
           size="large"
           alignSelf="end"
@@ -79,6 +78,7 @@ function Home(props) {
         </Heading>
       </Box>
       <Box
+        id="video"
         style={{
           position: "absolute",
           top: 0,
@@ -92,7 +92,8 @@ function Home(props) {
         </Video>
       </Box>
       <Box
-        background={{ color: "dark-1", opacity: "strong" }}
+        id="videoOverlay"
+        background={{ color: "#363636", opacity: "medium" }}
         style={{ position: "absolute", top: 0, zIndex: -9 }}
         width={{ min: "1905px" }}
         height={{ min: "1073px" }}
@@ -102,6 +103,7 @@ function Home(props) {
         searchValue={searchValue}
         setSearchValue={setSearchValue}
         setSkillDetails={setSkillDetails}
+        darkMode={props.darkMode}
       />
       {skillDetails ? (
         <SkillDetails skill={skillDetails} setSkillDetails={setSkillDetails} />

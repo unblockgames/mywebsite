@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Box, Button, Nav, ResponsiveContext } from "grommet";
+import { Avatar, Box, Button, CheckBox, Nav, ResponsiveContext } from "grommet";
 import { Link, useNavigate } from "react-router-dom";
 import me from "../static/pictures/me.jpeg";
 
@@ -14,18 +14,27 @@ function Header(props) {
   const size = React.useContext(ResponsiveContext);
   return (
     <Box direction="row" justify="between">
-      <Box
-        focusIndicator
-        onClick={() => {
-          handleClick(navigate);
-        }}
-      >
-        <Avatar margin="small" src={me} alignSelf="start" />
+      <Box direction="row">
+        <Box
+          focusIndicator
+          onClick={() => {
+            handleClick(navigate);
+          }}
+        >
+          <Avatar margin="small" src={me} alignSelf="start" />
+        </Box>
+        <Box alignSelf="center">
+          <CheckBox
+            toggle
+            onChange={() => props.setDarkMode(!props.darkMode)}
+          />
+        </Box>
       </Box>
       <Nav direction="row" margin={"small"}>
         <Box height={"2em"}>
           <Button
             primary
+            color={props.darkMode ? "green" : ""}
             label="Home"
             fill
             onClick={() => {
@@ -36,6 +45,7 @@ function Header(props) {
         <Box height={"2em"}>
           <Button
             primary
+            color={props.darkMode ? "green" : ""}
             label="Skills"
             fill
             onClick={() => {
@@ -48,6 +58,7 @@ function Header(props) {
         <Box height={"2em"}>
           <Button
             primary
+            color={props.darkMode ? "green" : ""}
             label="Softwares"
             fill
             onClick={() => {

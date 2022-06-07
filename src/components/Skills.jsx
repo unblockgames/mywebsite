@@ -9,6 +9,8 @@ import {
   CardHeader,
   Text,
   Image,
+  defaultProps,
+  dark,
 } from "grommet";
 import skills from "../skills";
 
@@ -18,41 +20,87 @@ function handleCardClick(skill, setSkillDetails) {
   return;
 }
 
-function Skills({ searchValue, setSearchValue, setSkillDetails }) {
+function Skills(props) {
   return (
-    <Box background="background-back" fill="horizontal" height="100em">
-      <Heading level={"1"} size="large" alignSelf="center" color={"white"}>
+    <Box fill="horizontal" style={{ position: "relative" }}>
+      <Box
+        style={{ position: "absolute", zIndex: "-10" }}
+        fill
+        background={props.darkMode ? "#000000" : "#FFFFFF"}
+      ></Box>
+      <Heading
+        level={"1"}
+        size="large"
+        alignSelf="center"
+        style={{ transform: "skewY(-5deg)" }}
+        color={props.darkMode ? "" : "black"}
+      >
         Skills
       </Heading>
+      <Box
+        width={"30%"}
+        height={"2px"}
+        background="focus"
+        style={{ transform: "skewY(-5deg)" }}
+      ></Box>
+      <Box
+        alignSelf="end"
+        width={"30%"}
+        height={"2px"}
+        background="focus"
+        style={{ transform: "skewY(20deg)" }}
+      ></Box>
       <Box width={"medium"} alignSelf="center" margin={"medium"}>
         <TextInput
           placeholder="Search for a specific skill"
           onChange={(nextValue) => {
-            setSearchValue(nextValue.target.value);
+            props.setSearchValue(nextValue.target.value);
           }}
+          color="light-3"
         />
       </Box>
       <Box margin={"medium"}>
         {skills.filter((skill) =>
-          skill.name.toLowerCase().startsWith(searchValue.toLowerCase())
+          skill.name.toLowerCase().startsWith(props.searchValue.toLowerCase())
         ).length > 0 ? (
           <Grid columns={"small"} rows="small" gap="xxsmall" pad={"medium"}>
             {skills
               .filter((skill) =>
-                skill.name.toLowerCase().startsWith(searchValue.toLowerCase())
+                skill.name
+                  .toLowerCase()
+                  .startsWith(props.searchValue.toLowerCase())
               )
               .map((skill, idx) => {
                 return (
                   <Box key={idx} fill align="center" pad={"xsmall"}>
                     <Card
-                      hoverIndicator={{ color: "green" }}
+                      hoverIndicator={
+                        props.darkMode ? { color: "green" } : { color: "brand" }
+                      }
                       fill
-                      onClick={() => handleCardClick(skill, setSkillDetails)}
-                      style={{ position: "relative" }}
+                      onClick={() =>
+                        handleCardClick(skill, props.setSkillDetails)
+                      }
+                      style={
+                        props.darkMode
+                          ? {
+                              position: "relative",
+                              boxShadow: "2px 3px 4px rgba(255,255,255,0.30)",
+                            }
+                          : {
+                              position: "relative",
+                              boxShadow: "2px 3px 4px rgba(0,0,0,0.30)",
+                            }
+                      }
                       skillName={skill.name}
+                      color={props.darkMode ? "white" : "Black"}
                     >
                       <CardHeader margin={"xsmall"} justify="center">
-                        <Text size="xlarge" textAlign="center">
+                        <Text
+                          color={props.darkMode ? "white" : "black"}
+                          size="xlarge"
+                          textAlign="center"
+                        >
                           <b>{skill.name}</b>
                         </Text>
                       </CardHeader>
@@ -61,7 +109,9 @@ function Skills({ searchValue, setSearchValue, setSkillDetails }) {
                         justify="center"
                         alignSelf="center"
                       >
-                        <Text>{skill.summary}</Text>
+                        <Text color={props.darkMode ? "white" : "black"}>
+                          {skill.summary}
+                        </Text>
                       </CardBody>
                       <Image
                         style={{ position: "absolute", right: "0px" }}
@@ -80,6 +130,22 @@ function Skills({ searchValue, setSearchValue, setSkillDetails }) {
           </Heading>
         )}
       </Box>
+      <Box
+        alignSelf="end"
+        width={"10%"}
+        round
+        height={"medium"}
+        background="focus"
+        style={{ transform: "skewY(30deg)", zIndex: "-1" }}
+      ></Box>
+      <Box
+        alignSelf="start"
+        width={"20%"}
+        round
+        height={"xxsmall"}
+        background="focus"
+        style={{ transform: "skewY(-30deg)", zIndex: "-1" }}
+      ></Box>
     </Box>
   );
 }
