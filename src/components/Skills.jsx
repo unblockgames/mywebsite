@@ -15,14 +15,18 @@ import {
 import skills from "../skills";
 
 function handleCardClick(skill, setSkillDetails) {
-  console.log(skill.name);
   setSkillDetails(skill);
   return;
 }
 
 function Skills(props) {
   return (
-    <Box fill="horizontal" style={{ position: "relative" }}>
+    <Box
+      fill="horizontal"
+      style={{ position: "relative" }}
+      height={{ min: "1080px" }}
+      id="skills"
+    >
       <Box
         style={{ position: "absolute", zIndex: "-10" }}
         fill
@@ -33,7 +37,7 @@ function Skills(props) {
         size="large"
         alignSelf="center"
         style={{ transform: "skewY(-5deg)" }}
-        color={props.darkMode ? "" : "black"}
+        color={props.darkMode ? "white" : "black"}
       >
         Skills
       </Heading>
@@ -78,8 +82,10 @@ function Skills(props) {
                         props.darkMode ? { color: "green" } : { color: "brand" }
                       }
                       fill
-                      onClick={() =>
-                        handleCardClick(skill, props.setSkillDetails)
+                      onClick={
+                        skill.hasContent
+                          ? () => handleCardClick(skill, props.setSkillDetails)
+                          : ""
                       }
                       style={
                         props.darkMode
@@ -92,6 +98,7 @@ function Skills(props) {
                               boxShadow: "2px 3px 4px rgba(0,0,0,0.30)",
                             }
                       }
+                      background={props.darkMode ? "black" : "white"}
                       skillName={skill.name}
                       color={props.darkMode ? "white" : "Black"}
                     >
@@ -136,7 +143,13 @@ function Skills(props) {
         round
         height={"medium"}
         background="focus"
-        style={{ transform: "skewY(30deg)", zIndex: "-1" }}
+        style={{
+          transform: "skewY(30deg)",
+          zIndex: "-1",
+          position: "absolute",
+          bottom: "0px",
+          right: "0px",
+        }}
       ></Box>
       <Box
         alignSelf="start"
@@ -144,7 +157,12 @@ function Skills(props) {
         round
         height={"xxsmall"}
         background="focus"
-        style={{ transform: "skewY(-30deg)", zIndex: "-1" }}
+        style={{
+          transform: "skewY(-30deg)",
+          zIndex: "-1",
+          position: "absolute",
+          bottom: "0px",
+        }}
       ></Box>
     </Box>
   );

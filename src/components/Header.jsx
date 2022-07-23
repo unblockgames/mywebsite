@@ -1,12 +1,19 @@
 import React from "react";
 import { Avatar, Box, Button, CheckBox, Nav, ResponsiveContext } from "grommet";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useMatch } from "react-router-dom";
 import me from "../static/pictures/me.jpeg";
 
 function handleClick(navigate) {
-  console.log("Clicked");
   navigate("/About");
   return;
+}
+
+function getOffset(el) {
+  const rect = el.getBoundingClientRect();
+  return {
+    left: rect.left + window.scrollX,
+    top: rect.top + window.scrollY,
+  };
 }
 
 function Header(props) {
@@ -49,9 +56,11 @@ function Header(props) {
             label="Skills"
             fill
             onClick={() => {
-              if (size === "small")
-                window.scrollTo({ top: 1040, behavior: "smooth" });
-              else window.scrollTo({ top: 1100, behavior: "smooth" });
+              navigate("/");
+              window.scrollTo({
+                top: getOffset(document.getElementById("skills")).top,
+                behavior: "smooth",
+              });
             }}
           />
         </Box>
@@ -59,10 +68,14 @@ function Header(props) {
           <Button
             primary
             color={props.darkMode ? "green" : ""}
-            label="Softwares"
+            label="Projects"
             fill
             onClick={() => {
-              navigate("/Softwares");
+              navigate("/");
+              window.scrollTo({
+                top: getOffset(document.getElementById("projects")).top,
+                behavior: "smooth",
+              });
             }}
           />
         </Box>

@@ -10,6 +10,7 @@ import {
   Heading,
   Image,
   Main,
+  ResponsiveContext,
   Text,
   TextInput,
   Video,
@@ -17,6 +18,7 @@ import {
 import test from "../static/videos/MVI_1011_2.mp4";
 import Skills from "../components/Skills";
 import SkillDetails from "../components/SkillDetails";
+import Projects from "../components/Projects";
 
 function handleClick() {
   const requestOptions = {
@@ -48,6 +50,7 @@ function handleClick() {
 function Home(props) {
   const [searchValue, setSearchValue] = React.useState("");
   const [skillDetails, setSkillDetails] = React.useState();
+  const size = React.useContext(ResponsiveContext);
   return (
     <Box id="home" overflow="hidden" width={{ max: "1920px" }}>
       <Box
@@ -61,6 +64,7 @@ function Home(props) {
         overflow="hidden"
       >
         <Heading
+          color={"white"}
           margin={"large"}
           level="1"
           size="large"
@@ -69,6 +73,7 @@ function Home(props) {
           I'm not a jack of all trades...
         </Heading>
         <Heading
+          color={"white"}
           margin={"large"}
           level="1"
           size="large"
@@ -95,8 +100,9 @@ function Home(props) {
         id="videoOverlay"
         background={{ color: "#363636", opacity: "medium" }}
         style={{ position: "absolute", top: 0, zIndex: -9 }}
-        width={{ min: "1905px" }}
-        height={{ min: "1073px" }}
+        width={{ min: "1910px" }}
+        fill
+        height={size === "small" ? { min: "1034px" } : { min: "1070px" }}
         overflow="hidden"
       ></Box>
       <Skills
@@ -106,10 +112,15 @@ function Home(props) {
         darkMode={props.darkMode}
       />
       {skillDetails ? (
-        <SkillDetails skill={skillDetails} setSkillDetails={setSkillDetails} />
+        <SkillDetails
+          skill={skillDetails}
+          setSkillDetails={setSkillDetails}
+          darkMode={props.darkMode}
+        />
       ) : (
         ""
       )}
+      <Projects darkMode={props.darkMode} />
     </Box>
   );
 }

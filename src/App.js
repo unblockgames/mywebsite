@@ -19,9 +19,9 @@ import { deepMerge } from "grommet/utils";
 import { css } from "styled-components";
 
 const checkboxCheckStyle = css`
-9  background-color: #2196f3;
-10  border-color: #2196f3;
-11`;
+  background-color: green;
+  border-color: #a708cf;
+`;
 
 const theme = {
   global: {
@@ -39,9 +39,6 @@ const theme = {
       "toggle-knob": "white",
       "toggle-accent": "accent-2",
     },
-  },
-  heading: {
-    color: "white",
   },
   checkBox: {
     border: {
@@ -61,7 +58,6 @@ const theme = {
       },
     },
     toggle: {
-      background: { light: "toggle-accent" },
       color: {
         light: "toggle-knob",
       },
